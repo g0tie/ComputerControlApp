@@ -14,7 +14,8 @@ class ComputerController extends Controller
      */
     public function index()
     {
-        //
+        $computers = Computer::all();
+        return view('computers.index', compact('computers'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ComputerController extends Controller
      */
     public function create()
     {
-        //
+        return view('computers.create');
     }
 
     /**
@@ -35,7 +36,17 @@ class ComputerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $computer = Computer::create([
+            'name' => $request->name,
+        ]);
+
+        $computer->save();
+
+        return redirect('/computers')->with('status', 'New computer registered!');
     }
 
     /**
@@ -46,7 +57,7 @@ class ComputerController extends Controller
      */
     public function show(Computer $computer)
     {
-        //
+        return view('computers.show', compact('computer'));
     }
 
     /**
@@ -57,7 +68,7 @@ class ComputerController extends Controller
      */
     public function edit(Computer $computer)
     {
-        //
+        return view('users.edit', compact('computer'));
     }
 
     /**
@@ -69,7 +80,8 @@ class ComputerController extends Controller
      */
     public function update(Request $request, Computer $computer)
     {
-        //
+        $computer->update($request->all());
+        return redirect('/computers')->with('status', 'Computer updated!');
     }
 
     /**
@@ -80,6 +92,8 @@ class ComputerController extends Controller
      */
     public function destroy(Computer $computer)
     {
-        //
+        $computer->delete();
+
+        return redirect('/computers')->with('status', 'User deleted!');
     }
 }

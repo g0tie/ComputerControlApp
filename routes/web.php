@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ComputerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('products', UserController::class);
-Route::resource('products', ComputerController::class);
-
 require __DIR__.'/auth.php';
+
+Route::group(['middleware' => ['auth', 'isAdmin']], function() {
+
+    Route::resources([
+        'users' => UserController::class,
+        'computers' => ComputerController::class
+    ]);
+});
