@@ -1,5 +1,5 @@
-@extends('main')
+@extends('admin.users.main')
 
-@section('user')
+@section('users')
         <x-make-user />
 @endsection

@@ -1,5 +1,5 @@
 @extends('admin.users.main')
 
-@section('user')
+@section('users')
     <x-user-modify :user="$user"/>
 @endsection
