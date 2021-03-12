@@ -15,7 +15,7 @@ class ComputerController extends Controller
     public function index()
     {
         $computers = Computer::all();
-        return view('computers.index', compact('computers'));
+        return view('admin.computers.index', compact('computers'));
     }
 
     /**
