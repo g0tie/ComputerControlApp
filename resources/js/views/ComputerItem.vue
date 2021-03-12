@@ -4,12 +4,16 @@
     v-if="showForm === false"
     class="d-flex justify-content-between bg-white rounded-lg row p-2 my-2 mx-0 shadow-sm">
       <p class="">{{ computer.name }}</p>
-      <button @click="toggleForm" class="btn btn-primary">Modifier</button>
-      <form method="post" v-bind:action="`/computers/${this.computer.id}`" class="m-0">
-        <input type="hidden" name="_token" :value="csrf">
-        <input type="hidden" name="_method" value="delete" />
-        <input type="submit" class="btn btn-danger" value="Supprimer"/>
-      </form>
+
+      <div class="d-flex justify-content-between">
+        <button @click="toggleForm" class="btn btn-primary">Modifier</button>
+        <form method="post" v-bind:action="`/computers/${this.computer.id}`" class="m-0">
+          <input type="hidden" name="_token" :value="csrf">
+          <input type="hidden" name="_method" value="delete" />
+          <input type="submit" class="mx-2 btn btn-danger" value="Supprimer"/>
+        </form>
+      </div>
+
     </div>
 
     <div v-if="showForm">

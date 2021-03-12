@@ -1,7 +1,9 @@
 @props(['user'])
 <div class="card">
+    <h3 class="border-bottom bg-white p-2">Infos sur l'utilisateur:</h3>
     <div class="card-header">
-        {{ $user->firstname }} {{ $user->lastname }}
+        <p>Nom: {{ $user->firstname }} </p>
+       <p> Prénom:{{ $user->lastname }}</p>
     </div>
 
     <div class="card-body">

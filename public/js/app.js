@@ -3837,6 +3837,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {},
   props: ['computer'],
@@ -21560,37 +21564,42 @@ var render = function() {
           [
             _c("p", {}, [_vm._v(_vm._s(_vm.computer.name))]),
             _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", on: { click: _vm.toggleForm } },
-              [_vm._v("Modifier")]
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "m-0",
-                attrs: {
-                  method: "post",
-                  action: "/computers/" + this.computer.id
-                }
-              },
-              [
-                _c("input", {
-                  attrs: { type: "hidden", name: "_token" },
-                  domProps: { value: _vm.csrf }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  attrs: { type: "hidden", name: "_method", value: "delete" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "btn btn-danger",
-                  attrs: { type: "submit", value: "Supprimer" }
-                })
-              ]
-            )
+            _c("div", { staticClass: "d-flex justify-content-between" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: { click: _vm.toggleForm }
+                },
+                [_vm._v("Modifier")]
+              ),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  staticClass: "m-0",
+                  attrs: {
+                    method: "post",
+                    action: "/computers/" + this.computer.id
+                  }
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_method", value: "delete" }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "mx-2 btn btn-danger",
+                    attrs: { type: "submit", value: "Supprimer" }
+                  })
+                ]
+              )
+            ])
           ]
         )
       : _vm._e(),
@@ -21680,7 +21689,7 @@ var render = function() {
               "py-2 text-center border border-dark d-block rounded-lg text-dark mb-2",
             on: { click: _vm.toggleForm }
           },
-          [_vm._v("Créer un poste")]
+          [_vm._v("+ Créer un poste")]
         )
       : _vm._e(),
     _vm._v(" "),

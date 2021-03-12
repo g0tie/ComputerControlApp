@@ -3,7 +3,7 @@
     <button
     @click="toggleForm" 
     class="py-2 text-center border border-dark d-block rounded-lg text-dark mb-2"  
-    v-if="btnToggle">Créer un poste</button>
+    v-if="btnToggle">+ Créer un poste</button>
 
     <div v-if="showForm" class="">
        

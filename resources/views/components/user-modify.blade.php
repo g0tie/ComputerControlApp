@@ -5,6 +5,7 @@
     class="col-6 p-4 mx-auto bg-white rounded-lg d-flex flex-column shadow-sm">
     @csrf
         
+        <h3 class="border-bottom">Modifier l'utilisateur</h3>
         <input type="hidden" name="_method" value="put" /> 
         <label>Prénom:</label>   
         <input  class="mb-2 form-control" type="text" name="firstname" value="{{ $user->firstname }}" />
