@@ -21626,7 +21626,8 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "mb-2 form-control",
-                attrs: { type: "text", name: "name", required: "" }
+                attrs: { type: "text", name: "name", required: "" },
+                domProps: { value: _vm.computer.name }
               }),
               _vm._v(" "),
               _c("input", {

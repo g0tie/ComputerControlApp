@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComputerController;
+use App\Http\Controllers\AttributionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,12 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth', 'isAdmin']], function() {
 
-    Route::resources([
-        'users' => UserController::class,
-        'computers' => ComputerController::class
+ 
+    Route::resource('users', UserController::class);
+    Route::resource('computers', ComputerController::class)->except([
+        'create', 'show', 'edit'
     ]);
+
+    Route::get('/attributions', [AttributionController::class, 'index']);
+    Route::post('/attributions',[AttributionController::class, 'show']);
 });

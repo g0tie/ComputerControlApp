@@ -77,7 +77,7 @@
                   <a href="" class="nav-link">
                 @endif
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Postes d'ordinateur</p>
+                  <p>Postes informatique</p>
                 </a>
               </li>
 

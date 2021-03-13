@@ -22,7 +22,7 @@
              
               <label class="col-4">Nom du poste informatique:</label>
            
-              <input class="mb-2 form-control" type="text" name="name" required/>
+              <input class="mb-2 form-control" type="text" name="name" :value="computer.name" required/>
           
               <input type="hidden" name="_token" :value="csrf">
               <input type="hidden" name="_method" value="put">
