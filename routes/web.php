@@ -35,5 +35,6 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function() {
     ]);
 
     Route::get('/attributions', [AttributionController::class, 'index']);
-    Route::post('/attributions',[AttributionController::class, 'show']);
+    Route::post('/attributions',[AttributionController::class, 'store']);
+    Route::delete('/attributions/{id}',[AttributionController::class, 'destroy']);
 });

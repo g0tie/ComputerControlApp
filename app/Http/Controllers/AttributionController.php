@@ -39,4 +39,20 @@ class AttributionController extends Controller
 
         return redirect('/attributions')->with('status', 'New attribution created!');
     }
+
+    public function destroy($id)
+    {
+        $attribution = Attribution::find($id);
+        $user = User::find($attribution->user_id);
+        $computer = Computer::find($attribution->computer_id);
+
+        $user->hasComputer = 0;
+        $computer->isOccupied = 0;
+
+        $user->save();
+        $computer->save();
+        $attribution->delete();
+
+        return redirect('/attributions')->with('status', 'New attribution deleted!');
+    }
 }

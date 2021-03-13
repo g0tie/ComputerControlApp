@@ -1,4 +1,5 @@
 @props(['attributions', 'users', 'computers'])
+<div>
 <table class="table">
   <thead>
     <tr>
@@ -9,32 +10,48 @@
     </tr>
   </thead>
 
-  <tbody>
-    @foreach($attributions as $attribution)
-        @php
-            $username = '';
-            $computername = '';
-        @endphp
-            
-        @foreach($users as $user) 
-            @if($user->id === attribution->user_id) 
-                $username = $user->name
-            @endif
-        @endforeach
+    <tbody>
+    @forelse($attributions as $attribution)
+            @php
+                $username = '';
+                $computername = '';
+            @endphp
+                
+            @foreach($users as $user)
+              @if($user->id == $attribution->$user_id)
+                @php
+                    $username = $user->firstname . ' ' .$user->lastname
+                @endphp
+              @endif
+            @endforeach
 
-        @foreach($computers as $computer) 
-            @if ($computer->id === attribution->computer_id) 
-                $computername = $computer->name;
-            @endif
-        @endforeach
-      
-        <tr>
-            <td>{{ $username }}</td>
-            <td>{{ $computername }}</td>
-            <td>{{ $attribution->starting_date }}</td>
-            <td>{{ $attribution->expiration_date</td>
-        </tr>
-    @endforeach
-  </tbody>
+            @foreach($computers as $computer)
+                @php
+                    $computername = $computer->name
+                @endphp
+            @endforeach
+                    
+            <tr>
+                <td>{{ $username }}</td>
+                <td>{{ $computername }}</td>
+                <td>{{ $attribution->starting_date }}</td>
+                <td>{{ $attribution->expiration_date }}</td>
+                <td>
+                    <form class="m-0" action="{{ url('/attributions/' . $attribution->id) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="delete" />
+                        <input class="btn btn-danger" type="submit" value="Supprimer" />
+                    </form>
+                </td>
+            </tr>
+            @empty
+
+            <tr>
+                <td>No Attributions</td>
+            </tr>
+
+        @endforelse
+    </tbody>
+
 </table>
-
+</div>
