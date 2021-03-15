@@ -5,9 +5,21 @@
 @endsection
 
 @section('content')
+
+    @if($errors->any)
+        @foreach($errors->all() as $error)
+            <x-alert type="danger" :message="$error"/>
+        @endforeach
+    @endif 
+
+    @if(Session::has('status'))
+      <x-alert type="success" :message="Session::get('status')" />
+   @endif
+
+
     <h3>Liste des attributions</h3>
     @if(isset($attributions))
-    <x-attributions :attributions="$attributions" :users="$available_users" :computers="$available_computers" />
+    <x-attributions :attribs="$attributions" :users="$available_users" :computers="$available_computers" />
     @endif
     <hr />
 

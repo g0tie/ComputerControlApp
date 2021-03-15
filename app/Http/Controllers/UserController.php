@@ -17,8 +17,8 @@ class UserController extends Controller
     {   
         //list all users
         $users = User::all();
-        $menu_01 = True;
-        return view('admin.users.index', compact('users', 'menu_01'));
+        $menu_users = TRUE;
+        return view('admin.users.index', compact('users', 'menu_users'));
     }
 
     /**
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function create()
     {
         //user creation form
-        return view('admin.users.create');
+        return view('admin.users.create', ["menu_users" => TRUE] );
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/users')->with('status', 'New user created!');
+        return redirect('/users')->with('status', 'Nouvel utilisateur créé !');
         
     }
 
@@ -67,8 +67,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
-    {
-        return view('admin.users.show', compact('user'));
+    {   
+        $menu_users = TRUE;
+        return view('admin.users.show', compact('user', 'menu_users'));
     }
 
     /**
@@ -79,7 +80,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {   
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'menu_users'));
+        $menu_users = TRUE;
     }
 
     /**
@@ -92,7 +94,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        return redirect('/users')->with('status', 'User updated!');
+        return redirect('/users')->with('status', 'Le profil de l\'utilisateur a été mis à jour !');
     }
 
     /**
@@ -105,6 +107,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('/users')->with('status', 'User deleted!');
+        return redirect('/users')->with('status', 'L\'utilisateur ' . $user->firstname . ' a été supprimé');
     }
 }

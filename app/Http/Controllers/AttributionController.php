@@ -15,8 +15,14 @@ class AttributionController extends Controller
         $available_computers = Computer::where('isOccupied', 0)->get();
         $available_users = User::where('hasComputer', 0)->get();
         $attributions = Attribution::all();
+        $menu_attributions = TRUE;
 
-        return view('admin.attributions.index', compact('available_computers', 'available_users', 'attributions'));
+        return view('admin.attributions.index', [
+            'available_users' => $available_users,
+            'available_computers' => $available_computers,
+            'attributions' => $attributions,
+            'menu_attributions' => $menu_attributions
+        ]);
     }
 
     public function store(Request $request)
@@ -45,7 +51,7 @@ class AttributionController extends Controller
             'isOccupied'=> 1,
         ]);
 
-        return redirect('/attributions')->with('status', 'New attribution created!');
+        return redirect('/attributions')->with('status', 'Nouvelle attribution créée');
     }
 
     public function destroy($id)
@@ -62,6 +68,6 @@ class AttributionController extends Controller
        
         $attribution->delete();
 
-        return redirect('/attributions')->with('status', 'New attribution deleted!');
+        return redirect('/attributions')->with('status', 'L\'attribution ' . $attribution->id . 'a été supprimée');
     }
 }

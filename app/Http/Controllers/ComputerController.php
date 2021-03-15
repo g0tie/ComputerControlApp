@@ -15,19 +15,10 @@ class ComputerController extends Controller
     public function index()
     {
         $computers = Computer::all();
-        return view('admin.computers.index', compact('computers'));
+        $menu_computers = TRUE;
+        return view('admin.computers.index', compact('computers', 'menu_computers'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('computers.create');
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -46,30 +37,9 @@ class ComputerController extends Controller
 
         $computer->save();
 
-        return redirect('/computers')->with('status', 'New computer registered!');
+        return redirect('/computers')->with('status', 'Nouveau poste enregistré !');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Computer  $computer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Computer $computer)
-    {
-        return view('computers.show', compact('computer'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Computer  $computer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Computer $computer)
-    {
-        return view('users.edit', compact('computer'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -81,7 +51,7 @@ class ComputerController extends Controller
     public function update(Request $request, Computer $computer)
     {
         $computer->update($request->all());
-        return redirect('/computers')->with('status', 'Computer updated!');
+        return redirect('/computers')->with('status', 'Le poste informatique a été modifié !');
     }
 
     /**
@@ -94,6 +64,6 @@ class ComputerController extends Controller
     {
         $computer->delete();
 
-        return redirect('/computers')->with('status', 'User deleted!');
+        return redirect('/computers')->with('status', 'Le poste informatique ' . $computer->name . ' a été supprimé ');
     }
 }

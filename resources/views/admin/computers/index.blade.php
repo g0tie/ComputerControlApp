@@ -6,6 +6,16 @@
 
 @section('content')
 <div id="app">
+    @if($errors->any)
+        @foreach($errors->all() as $error)
+            <x-alert type="danger" :message="$error"/>
+        @endforeach
+    @endif 
+
+    @if(Session::has('status'))
+      <x-alert type="success" :message="Session::get('status')" />
+   @endif
+
     <make-computer></make-computer>
     @foreach($computers as $computer)
 

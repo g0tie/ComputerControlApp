@@ -61,20 +61,20 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
 
-              @if(isset($menu_01))
-                <a href="" class="nav-link active">
+              @if(isset($menu_users))
+                <a href="/users" class="nav-link active">
               @else
-                <a href="" class="nav-link">
+                <a href="/users" class="nav-link">
               @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Utilisateurs</p>
                 </a>
               </li>
               <li class="nav-item">
-                @if(isset($menu_02))
-                  <a href="" class="nav-link active">
+                @if(isset($menu_computers))
+                  <a href="/computers" class="nav-link active">
                 @else
-                  <a href="" class="nav-link">
+                  <a href="/computers" class="nav-link">
                 @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Postes informatique</p>
@@ -82,10 +82,10 @@
               </li>
 
               <li class="nav-item">
-                @if(isset($menu_03))
-                  <a href="" class="nav-link active">
+                @if(isset($menu_attributions))
+                  <a href="/attributions" class="nav-link active">
                 @else
-                  <a href="" class="nav-link">
+                  <a href="/attributions" class="nav-link">
                 @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Attributions</p>
