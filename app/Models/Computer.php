@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Attribution;
 
 class Computer extends Model
 {
@@ -16,7 +17,12 @@ class Computer extends Model
      */
     protected $fillable = [
         'name',
-        'isOccupied'
+        'isOccupied',
+        'attribution_id'
     ];
 
+    public function attribution()
+    {
+        return $this->hasOne(Attribution::class);
+    }
 }

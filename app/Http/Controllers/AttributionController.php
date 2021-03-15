@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Computer;
 use App\Models\Attribution;
 use App\Models\User;
+use Response;
 
 class AttributionController extends Controller
 {
@@ -20,8 +21,12 @@ class AttributionController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::find($request->user_id);
-        $computer = Computer::find($request->computer_id);
+        $request->validate([
+            'user_id' => 'required|numeric',
+            'computer_id' => 'required|numeric',
+            'starting_date' => 'required|date',
+            'expiration_date' => 'required|date'
+        ]);
 
         $attribution = Attribution::create([
             'user_id' => $request->user_id,
@@ -30,12 +35,15 @@ class AttributionController extends Controller
             'expiration_date' => $request->expiration_date
         ]);
 
-        $user->hasComputer = 1;
-        $computer->isOccupied = 1;
-
-        $user->save();
-        $computer->save();
         $attribution->save();
+
+        $user = $attribution->getUser($request->user_id)->update([
+            'hasComputer'=> 1,
+        ]);
+
+        $computer = $attribution->getComputer($request->computer_id)->update([
+            'isOccupied'=> 1,
+        ]);
 
         return redirect('/attributions')->with('status', 'New attribution created!');
     }
@@ -43,14 +51,15 @@ class AttributionController extends Controller
     public function destroy($id)
     {
         $attribution = Attribution::find($id);
-        $user = User::find($attribution->user_id);
-        $computer = Computer::find($attribution->computer_id);
 
-        $user->hasComputer = 0;
-        $computer->isOccupied = 0;
+        $user = $attribution->getUser($attribution->user_id)->update([
+            'hasComputer'=> 0,
+        ]);
 
-        $user->save();
-        $computer->save();
+        $computer = $attribution->getComputer($attribution->computer_id)->update([
+            'isOccupied'=> 0,
+        ]);
+       
         $attribution->delete();
 
         return redirect('/attributions')->with('status', 'New attribution deleted!');
