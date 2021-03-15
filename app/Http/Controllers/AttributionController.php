@@ -17,12 +17,12 @@ class AttributionController extends Controller
         $attributions = Attribution::all();
         $menu_attributions = TRUE;
 
-        return view('admin.attributions.index', [
-            'available_users' => $available_users,
-            'available_computers' => $available_computers,
-            'attributions' => $attributions,
-            'menu_attributions' => $menu_attributions
-        ]);
+        return view('admin.attributions.index', compact(
+            'available_computers', 
+            'available_users',
+            'attributions',
+            'menu_attributions'
+        ));
     }
 
     public function store(Request $request)
@@ -68,6 +68,6 @@ class AttributionController extends Controller
        
         $attribution->delete();
 
-        return redirect('/attributions')->with('status', 'L\'attribution ' . $attribution->id . 'a été supprimée');
+        return redirect('/attributions')->with('status', 'L\'attribution ' . $attribution->id . ' a été supprimée');
     }
 }

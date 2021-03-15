@@ -19,7 +19,7 @@
 
     <h3>Liste des attributions</h3>
     @if(isset($attributions))
-    <x-attributions :attribs="$attributions" :users="$available_users" :computers="$available_computers" />
+    <x-attributions :attributions="$attributions" :users="$available_users" :computers="$available_computers" />
     @endif
     <hr />
 
