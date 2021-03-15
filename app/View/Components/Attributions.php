@@ -7,17 +7,13 @@ use Illuminate\View\Component;
 class Attributions extends Component
 {
     public $attributions;
-    public $users;
-    public $computers;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($attributions, $users, $computers)
+    public function __construct($attributions)
     {
-        $this->computers = $computers;
-        $this->users = $users;
         $this->attributions = $attributions;
         
     }

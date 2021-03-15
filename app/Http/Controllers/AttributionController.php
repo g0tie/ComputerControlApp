@@ -16,11 +16,35 @@ class AttributionController extends Controller
         $available_users = User::where('hasComputer', 0)->get();
         $attributions = Attribution::all();
         $menu_attributions = TRUE;
+        $remaped_attributions = [];
 
+        foreach($attributions as $attribution) {
+            $username = '';
+            $computername = ''; 
+
+            foreach($available_users as $user) {
+                $username = $attribution->getUser($attribution->user_id)->firstname;
+            }
+
+            foreach($available_computers as $computer) {
+               $computername = $attribution->getCOmputer($attribution->computer_id)->firstname ?? '';
+            }
+            
+            $temp = [
+                'id' => $attribution->id,
+                'username' => $username,
+                'computername' => $computername,
+                'starting_date' => $attribution->starting_date,
+                'expiration_date' => $attribution->expiration_date
+            ];
+        
+            array_push($remaped_attributions, $temp);
+        }
+        
         return view('admin.attributions.index', compact(
             'available_computers', 
             'available_users',
-            'attributions',
+            'remaped_attributions',
             'menu_attributions'
         ));
     }

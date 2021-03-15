@@ -18,8 +18,8 @@
 
 
     <h3>Liste des attributions</h3>
-    @if(isset($attributions))
-    <x-attributions :attributions="$attributions" :users="$available_users" :computers="$available_computers" />
+    @if(isset($remaped_attributions))
+    <x-attributions :attributions="$remaped_attributions" />
     @endif
     <hr />
 

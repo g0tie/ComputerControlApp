@@ -1,4 +1,4 @@
-@props(['attributions', 'users', 'computers'])
+@props(['attributions'])
 <div>
 <table class="table">
   <thead>
@@ -11,33 +11,14 @@
   </thead>
 
     <tbody>
-    @forelse($attributions as $attribution)
-            @php
-                $username = '';
-                $computername = '';
-            @endphp
-                
-            @foreach($users as $user)
-              @if($user->id == $attribution->$user_id)
-                @php
-                    $username = $user->firstname . ' ' .$user->lastname
-                @endphp
-              @endif
-            @endforeach
-
-            @foreach($computers as $computer)
-                @php
-                    $computername = $computer->name
-                @endphp
-            @endforeach
-                    
+    @forelse($attributions as $attribution) 
             <tr>
-                <td>{{ $username }}</td>
-                <td>{{ $computername }}</td>
-                <td>{{ $attribution->starting_date }}</td>
-                <td>{{ $attribution->expiration_date }}</td>
+                <td>{{ $attribution['username'] }}</td>
+                <td>{{ $attribution['computername'] }}</td>
+                <td>{{ $attribution['starting_date'] }}</td>
+                <td>{{ $attribution['expiration_date'] }}</td>
                 <td>
-                    <form class="m-0" action="{{ url('/attributions/' . $attribution->id) }}" method="post">
+                    <form class="m-0" action="{{ url('/attributions/' . $attribution['id']) }}" method="post">
                         @csrf
                         <input type="hidden" name="_method" value="delete" />
                         <input class="btn btn-danger" type="submit" value="Supprimer" />
