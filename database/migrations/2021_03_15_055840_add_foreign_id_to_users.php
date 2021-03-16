@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComputersTable extends Migration
+class AddForeignIdToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateComputersTable extends Migration
      */
     public function up()
     {
-        Schema::create('computers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->boolean('isOccupied')->default(0);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('attribution_id')
+            ->nullable()
+            ->constrained('attributions')
+            ->unique();
         });
     }
 
@@ -28,6 +28,8 @@ class CreateComputersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('computers');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }
