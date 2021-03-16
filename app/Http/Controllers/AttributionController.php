@@ -12,9 +12,12 @@ class AttributionController extends Controller
 {
     public function index()
     {
+        self::resetOldAttributions();
+
+        $attributions = Attribution::all();
         $available_computers = Computer::where('isOccupied', 0)->get();
         $available_users = User::where('hasComputer', 0)->get();
-        $attributions = Attribution::all();
+        // $attributions = Attribution::where('expiration_date', '>=', $date)->get();
         $menu_attributions = TRUE;
         $remaped_attributions = [];
 
@@ -23,11 +26,11 @@ class AttributionController extends Controller
             $computername = ''; 
 
             foreach($available_users as $user) {
-                $username = $attribution->getUser($attribution->user_id)->firstname;
+                $username = $attribution->getUser($attribution->user_id)->firstname . ' '. $attribution->getUser($attribution->user_id)->lastname;
             }
 
             foreach($available_computers as $computer) {
-               $computername = $attribution->getCOmputer($attribution->computer_id)->firstname ?? '';
+               $computername = $attribution->getComputer($attribution->computer_id)->name;
             }
             
             $temp = [
@@ -40,7 +43,7 @@ class AttributionController extends Controller
         
             array_push($remaped_attributions, $temp);
         }
-        
+
         return view('admin.attributions.index', compact(
             'available_computers', 
             'available_users',
@@ -78,7 +81,7 @@ class AttributionController extends Controller
         return redirect('/attributions')->with('status', 'Nouvelle attribution créée');
     }
 
-    public function destroy($id)
+    public static function destroy($id)
     {
         $attribution = Attribution::find($id);
 
@@ -93,5 +96,16 @@ class AttributionController extends Controller
         $attribution->delete();
 
         return redirect('/attributions')->with('status', 'L\'attribution ' . $attribution->id . ' a été supprimée');
+    }
+
+    public static function resetOldAttributions() 
+    {    
+        $date = gmdate("Y-m-d", getDate()[0]);
+        $old_attributions = Attribution::where('expiration_date', '<', $date)->get();
+
+        foreach($old_attributions as $old_attribution) {
+            self::destroy($old_attribution->id);
+        }
+
     }
 }

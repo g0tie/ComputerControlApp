@@ -11,6 +11,8 @@ class HomeController extends Controller
 {
 
     public function index () {
+       AttributionController::resetOldAttributions();
+        
         $user = Auth::user();
         $attribution = Attribution::where('user_id', $user->id)->first();
 

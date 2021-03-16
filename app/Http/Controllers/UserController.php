@@ -80,8 +80,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {   
-        return view('admin.users.edit', compact('user', 'menu_users'));
         $menu_users = TRUE;
+        return view('admin.users.edit', compact('user', 'menu_users'));
     }
 
     /**
