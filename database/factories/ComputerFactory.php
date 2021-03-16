@@ -22,7 +22,7 @@ class ComputerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Poste_' . $this->faker->word
+            'name' => 'Poste_' . $this->faker->unique()->word
         ];
     }
 }
