@@ -25,14 +25,9 @@ class AttributionController extends Controller
             $username = '';
             $computername = ''; 
 
-            foreach($available_users as $user) {
-                $username = $attribution->getUser($attribution->user_id)->firstname . ' '. $attribution->getUser($attribution->user_id)->lastname;
-            }
+            $username = $attribution->getUser($attribution->user_id)->firstname . ' '. $attribution->getUser($attribution->user_id)->lastname;
+            $computername = $attribution->getComputer($attribution->computer_id)->name;
 
-            foreach($available_computers as $computer) {
-               $computername = $attribution->getComputer($attribution->computer_id)->name;
-            }
-            
             $temp = [
                 'id' => $attribution->id,
                 'username' => $username,
@@ -42,6 +37,7 @@ class AttributionController extends Controller
             ];
         
             array_push($remaped_attributions, $temp);
+            // return Response::json($available_users);
         }
 
         return view('admin.attributions.index', compact(
