@@ -1,5 +1,5 @@
 <div class="">
-  <form method="post" action="{{ url('/users')  }}" class="d-flex flex-column bg-white p-4 col-6 mx-auto shadow-sm">
+  <form method="post" action="{{ url('/users')  }}" class="d-flex flex-column bg-white p-4 col-8  mx-auto shadow-sm">
   @csrf
         
         <h3 class="border-bottom p-2">Créer un utilisateur</h3>

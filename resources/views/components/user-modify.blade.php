@@ -2,7 +2,7 @@
 <div class="">
     <form method="post" 
     action="{{ url('/users/' . $user->id) }}" 
-    class="col-6 p-4 mx-auto bg-white rounded-lg d-flex flex-column shadow-sm">
+    class="col-8 p-4 mx-auto bg-white rounded-lg d-flex flex-column shadow-sm">
     @csrf
         
         <h3 class="border-bottom">Modifier l'utilisateur</h3>

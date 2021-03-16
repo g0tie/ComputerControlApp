@@ -3,24 +3,33 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Panneau d'administration</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+
+<body class="hold-transition sidebar-mini sidebar-closed layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <form method="post" action="/logout" class="dropdown-item m-0" />
+
+    <form method="post" action="/logout" class="dropdown-item m-0" />
       @csrf
         <input type="submit" value="Se Déconnecter" class="btn btn-primary"/>
-      </form>
+    </form>
+
+      <button class="hamburger-menu" onClick="toggleMenu()" style="color:black; border:none; outline:none;background:none;">
+        <svg width="32" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <!-- Messages Dropdown Menu -->
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -35,10 +44,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img style="background:white" src="{{ asset('/user.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin Panel</a>
+          <a href="#" class="d-block">Paneau d'administration</a>
         </div>
       </div>
 
@@ -124,7 +133,7 @@
       
         <!-- Main row -->
         <div class="row">
-            <div class="col-10 mx-auto d-flex flex-column justify-content-center">
+            <div class="col-12 col-lg-8 mx-auto d-flex flex-column justify-content-center">
                @yield('content')
             </div>
         </div>
@@ -146,5 +155,19 @@
 </div>
 <!-- ./wrapper -->
 @yield('scripts')
+<script>
+  let body = document.body;
+
+  function toggleMenu() {
+    if (body.classList.contains('sidebar-closed')) {
+      body.classList.remove('sidebar-closed');
+      body.classList.add('sidebar-open');
+    } else {
+      body.classList.remove('sidebar-open');
+      body.classList.add('sidebar-closed');
+    }
+  }
+
+</script>
 </body>
 </html>
