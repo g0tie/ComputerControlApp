@@ -17,7 +17,8 @@ class AddForeignIdToUsers extends Migration
             $table->foreignId('attribution_id')
             ->nullable()
             ->constrained('attributions')
-            ->unique();
+            ->unique()
+            ->onDelete('cascade');
         });
     }
 

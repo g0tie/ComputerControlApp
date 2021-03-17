@@ -15,8 +15,8 @@ class CreateAttributionsTable extends Migration
     {
         Schema::create('attributions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->unique();
-            $table->foreignId('computer_id')->constrained('computers')->unique();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->unique();
+            $table->foreignId('computer_id')->constrained('computers')->onDelete('cascade')->unique();
             $table->date('starting_date');
             $table->date('expiration_date');
             $table->timestamps();
